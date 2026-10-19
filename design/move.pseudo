@@ -7,19 +7,41 @@
 # Write pseudocode, not Python code. Use clear indentation and course-appropriate
 # keywords such as INPUT, OUTPUT, IF, ELSE, WHILE, SET, or similar terms.
 
-# TODO 1: Identify the information the movement process needs.
-# Consider the player's current room and movement command.
+# Initialize the game loop state
+Set current_room to "Grand Foyer"
+Set game_running to True
 
-# TODO 2: Prompt for and receive the player's movement command.
+# Main Gameplay Loop
+While game_running is True:
+    Display the current_room to the player
+    
+    # Check if the player stepped into the villain's trap
+    If current_room is equal to "The Crypt":
+        If length of inventory is equal to 6:
+            Print "With all 6 artifacts in hand, you banish the Vampire Lord!"
+            Print "YOU WIN!"
+        Else:
+            Print "You entered The Crypt unprepared. The Vampire Lord destroys you..."
+            Print "GAME OVER!"
+        Set game_running to False
+        Break
+        
+    # Standard navigation prompt
+    Print "Exits available from here: " + list keys of rooms[current_room] excluding 'item'
+    Prompt player for input: "Which direction do you wish to travel? (North, South, East, West, or Exit)"
+    Set user_choice to player input
+    
+    # Process the choice
+    If user_choice is equal to "Exit":
+        Print "You fled Castle Ravencrest in terror. Goodbye!"
+        Set game_running to False
+        
+    Else If user_choice is a valid key in rooms[current_room]:
+        # Update the room location using the dictionary map
+        Set current_room to rooms[current_room][user_choice]
+        Print "You advance " + user_choice + " into the darkness..."
+        
+    Else:
+        # Input Validation Warning
+        Print "A magical barrier blocks that path! You cannot go that way."
 
-# TODO 3: Validate whether the requested movement is possible from the
-# current room. Show the decision clearly.
-
-# TODO 4: Describe what happens when the movement command is valid.
-# Include the room update and player output.
-
-# TODO 5: Describe what happens when the movement command is invalid.
-# Include the output the player should receive.
-
-# TODO 6: Show how movement fits into repeated gameplay.
-# The final game continues accepting commands until a required ending occurs.
